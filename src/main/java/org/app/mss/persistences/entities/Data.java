@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Entity
 @Getter
 @Setter
@@ -19,27 +22,15 @@ public class Data {
     private String type;
 
     @Column
-    private Double valor;
+    private Double value;
+
+    @Column
+    private LocalDate date;
+
+    @Column
+    private LocalTime time;
 
     @Column
     private String sensor;
-
-    @Column
-    private Integer day;
-
-    @Column
-    private Integer mount;
-
-    @Column
-    private Integer year;
-
-    @Column
-    private Integer hour;
-
-    @Column
-    private Integer minute;
-
-    @Column
-    private Integer second;
 
 }

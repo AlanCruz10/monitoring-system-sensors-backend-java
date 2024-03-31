@@ -4,6 +4,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Getter
 @Setter
 @Builder
@@ -17,16 +20,8 @@ public class DataResponse {
 
     private String type;
 
-    private Integer day;
+    private LocalDate date;
 
-    private Integer mount;
-
-    private Integer year;
-
-    private Integer hour;
-
-    private Integer minute;
-
-    private Integer second;
+    private LocalTime time;
 
 }
