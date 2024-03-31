@@ -23,7 +23,7 @@ public class DataService implements IDataService {
     @Override
     public BaseResponse getData(String sensor) {
         return BaseResponse.builder()
-                .data(getDataResponse(sensor.toLowerCase(Locale.ROOT)))
+                .data(getDataResponse(sensor.toLowerCase(Locale.ROOT).replace(" ", "")))
                 .message("Data sensor " + sensor)
                 .success(Boolean.TRUE)
                 .statusCode(HttpStatus.OK.value())
