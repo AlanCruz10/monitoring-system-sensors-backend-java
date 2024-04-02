@@ -1,5 +1,6 @@
 package org.app.mss.web.controllers.advices;
 
+import org.apache.coyote.BadRequestException;
 import org.app.mss.web.dtos.responses.BaseResponse;
 import org.app.mss.web.exceptions.NotFoundDataException;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,20 @@ public class ExceptionHandlerFactory {
     @ExceptionHandler(NotFoundDataException.class)
     private ResponseEntity<BaseResponse> handleNotFoundException(NotFoundDataException exception) {
         return BaseResponse.builder()
-                .message(exception.getLocalizedMessage())
+                .detail(exception.getLocalizedMessage())
                 .success(Boolean.FALSE)
                 .httpStatus(HttpStatus.NOT_FOUND)
-                .statusCode(404)
+                .status(404)
+                .build().apply();
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    private ResponseEntity<BaseResponse> handleNotFoundException(BadRequestException exception) {
+        return BaseResponse.builder()
+                .detail(exception.getLocalizedMessage())
+                .success(Boolean.FALSE)
+                .httpStatus(HttpStatus.BAD_REQUEST)
+                .status(400)
                 .build().apply();
     }
 

@@ -29,10 +29,10 @@ public class ValidationHandlerAdvice extends ResponseEntityExceptionHandler {
 
         BaseResponse baseResponse = BaseResponse.builder()
                 .data(errors)
-                .message("Validation failed")
+                .detail("Validation failed")
                 .success(Boolean.FALSE)
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .statusCode(400).build();
+                .status(400).build();
 
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
