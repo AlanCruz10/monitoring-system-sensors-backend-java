@@ -6,22 +6,19 @@ import org.app.mss.services.interfaces.IDataService;
 import org.app.mss.web.dtos.responses.BaseResponse;
 import org.app.mss.web.dtos.responses.DataResponse;
 import org.app.mss.web.exceptions.NotFoundDataException;
-import org.springframework.cglib.core.Local;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
-public class DataService implements IDataService {
+public class DataServiceImpl implements IDataService {
 
     private final IDataRepository repository;
 
-    public DataService(IDataRepository repository) {
+    public DataServiceImpl(IDataRepository repository) {
         this.repository = repository;
     }
 

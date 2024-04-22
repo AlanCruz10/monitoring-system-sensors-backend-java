@@ -8,4 +8,6 @@ public class NotFoundDataException extends RuntimeException {
 
     public NotFoundDataException(LocalDate date){super("Data sensor not found by date " + date);}
 
+    public NotFoundDataException(String email){super("User " + email + " Not Fount");}
+
 }
