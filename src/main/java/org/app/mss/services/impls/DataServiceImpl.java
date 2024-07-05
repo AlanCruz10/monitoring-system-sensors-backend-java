@@ -26,7 +26,7 @@ public class DataServiceImpl implements IDataService {
     public BaseResponse getData(String sensor) {
         return BaseResponse.builder()
                 .data(listDataResponse(sensor.toLowerCase(Locale.ROOT).replace(" ", "")))
-                .detail("Data sensor " + sensor)
+                .message("Data sensor " + sensor)
                 .success(Boolean.TRUE)
                 .status(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK).build();
@@ -36,7 +36,7 @@ public class DataServiceImpl implements IDataService {
     public BaseResponse getData(String sensor, LocalDate date) {
         return BaseResponse.builder()
                 .data(filterByMeasurementAndByDate(sensor.toLowerCase(Locale.ROOT).replace(" ", ""), date))
-                .detail("Data sensor " + sensor)
+                .message("Data sensor " + sensor)
                 .success(Boolean.TRUE)
                 .status(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK).build();

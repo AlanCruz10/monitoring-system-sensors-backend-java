@@ -15,7 +15,7 @@ public class BaseResponse {
 
     private Object data;
 
-    private String detail;
+    private String message;
 
     private Boolean success;
 

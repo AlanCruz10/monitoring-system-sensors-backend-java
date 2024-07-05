@@ -3,6 +3,8 @@ package org.app.mss.persistences.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,11 +26,9 @@ public class User {
     private String lastName;
 
     @Column(nullable = false, unique = true)
-    @Email
     private String email;
 
     @Column(nullable = false)
-    @NotBlank
     private String password;
 
 }

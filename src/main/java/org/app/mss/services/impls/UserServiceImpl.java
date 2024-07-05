@@ -10,6 +10,7 @@ import org.app.mss.web.dtos.responses.UserResponse;
 import org.app.mss.web.exceptions.BadRequestException;
 import org.app.mss.web.exceptions.NotFoundDataException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,17 +20,20 @@ public class UserServiceImpl implements IUserService {
 
     private final IUserRepository repository;
 
-    public UserServiceImpl(IUserRepository repository) {
+    private final PasswordEncoder passwordEncoder;
+
+    public UserServiceImpl(IUserRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public BaseResponse login(LoginUserRequest request) {
         User user = findUserByEmail(request.getEmail());
-        if (user.getPassword().equals(request.getPassword())) {
+        if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             return BaseResponse.builder()
                     .data(from(user))
-                    .detail("User logged")
+                    .message("User logged")
                     .success(Boolean.TRUE)
                     .status(HttpStatus.OK.value())
                     .httpStatus(HttpStatus.OK).build();
@@ -43,7 +47,7 @@ public class UserServiceImpl implements IUserService {
         if (user.isEmpty()){
             return BaseResponse.builder()
                     .data(from(from(request)))
-                    .detail("User created")
+                    .message("User created")
                     .success(Boolean.TRUE)
                     .status(HttpStatus.OK.value())
                     .httpStatus(HttpStatus.OK).build();
@@ -68,7 +72,7 @@ public class UserServiceImpl implements IUserService {
         user.setName(request.getName());
         user.setLastName(request.getLastName());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         return repository.save(user);
     }
 
